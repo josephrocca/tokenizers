@@ -19,11 +19,12 @@ exclude = [ "rust-toolchain", "target/*", "Cargo.lock", "benches/*.txt", "benche
 name = "tokenizers"
 path = "src/lib.rs"
 bench = false
+crate-type = ["cdylib"]  # TODO: Make this conditional on web build target?
 
-[[bin]]
-name = "cli"
-path = "src/cli.rs"
-bench = false
+# [[bin]]
+# name = "cli"
+# path = "src/cli.rs"
+# bench = false
 
 [[bench]]
 name = "bpe_benchmark"
@@ -49,7 +50,7 @@ unicode-segmentation = "1.6"
 indicatif = {version = "0.15", optional = true}
 itertools = "0.9"
 log = "0.4"
-esaxx-rs = "0.1"
+esaxx-pure-rs = { git = "https://github.com/josephrocca/esaxx-pure-rs", branch="patch-1" }  # this removes the C code
 derive_builder = "0.9"
 spm_precompiled = "0.1"
 dirs = "3.0"
@@ -62,14 +63,18 @@ once_cell = "1.8"
 cfg-if = "1"
 onig = { version = "6.0", default-features = false, optional = true }
 fancy-regex = { version = "0.7", optional = true }
+wasm-bindgen = { version = "0.2", optional = true }
+
 
 [features]
-default = ["progressbar", "http", "regex-onig"]
+default = ["web"]
+# default = ["progressbar", "http", "regex-onig"]
 progressbar = ["indicatif"]
 http = ["reqwest", "cached-path"]
 regex-fancy = ["fancy-regex"]
 regex-onig = ["onig"]
 regex-all-test = ["regex-onig", "regex-fancy"]
+web = ["wasm-bindgen", "regex-fancy"]
 
 [dev-dependencies]
 criterion = "0.3"
