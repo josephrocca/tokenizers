@@ -23,6 +23,8 @@ itertools = "0.9"
 [dependencies.tokenizers]
 version = "*"
 path = "../../tokenizers"
+default-features = false
+features = ["unstable_wasm"]
 
 [dev-dependencies]
 tempfile = "3.1"
