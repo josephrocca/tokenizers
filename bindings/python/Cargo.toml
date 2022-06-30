@@ -17,7 +17,6 @@ env_logger = "0.7.1"
 pyo3 = "0.16.2"
 numpy = "0.16.2"
 ndarray = "0.13"
-onig = { version = "6.0", default-features = false }
 itertools = "0.9"
 
 [dependencies.tokenizers]
